@@ -1,4 +1,3 @@
-
 .form-container {
   display: flex;
   flex-direction: column;
@@ -15,6 +14,7 @@
 }
 .form-container form {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   width: 70%;
   gap: 30px;

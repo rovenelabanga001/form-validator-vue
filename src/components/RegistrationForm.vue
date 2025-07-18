@@ -1,20 +1,35 @@
-<script setup lang="ts">
-import { provide, reactive } from "vue";
+<script setup>
+import { provide, ref } from "vue";
 import PersonalInfo from "./PersonalInfo.vue";
+import AccountSetup from "./AccountSetup.vue";
+import "../assets/style.css";
+import ReviewInfo from "./ReviewInfo.vue";
 
+const currentStep = ref(0);
+const stepCount = 3;
 
-const showButtons = reactive({
-  showPrevious: true,
-  showNext: true,
-});
+const nextStep = () => {
+  if (currentStep.value < stepCount - 1) {
+    currentStep.value++;
+  }
+};
 
-provide("showButtons", showButtons);
+const prevStep = () => {
+  if (currentStep.value > 0) {
+    currentStep.value--;
+  }
+};
+
+provide("currentStep", currentStep);
+provide("nextStep", nextStep);
+provide("prevStep", prevStep);
 </script>
 
 <template>
   <div class="app-container">
     <h1>User Registration</h1>
-    <PersonalInfo />
+    <!-- using is to dynamically bind a value to the components -->
+    <component :is="[PersonalInfo, AccountSetup, ReviewInfo][currentStep]" />
   </div>
 </template>
 <style scoped>

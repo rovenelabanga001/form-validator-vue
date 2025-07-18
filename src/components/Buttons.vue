@@ -1,18 +1,14 @@
 <script setup>
-import { inject, toRefs } from "vue";
+import { inject } from "vue";
 
-const injectedButtons = inject("showButtons");
-
-if (!injectedButtons) {
-  throw new Error("showButtons was not provided");
-}
-
-const { showPrevious, showNext } = toRefs(injectedButtons);
+const currentStep = inject("currentStep");
+const nextStep = inject("nextStep");
+const prevStep = inject("prevStep");
 </script>
 <template>
   <div class="buttons-container">
-    <button v-if="showPrevious">Previous</button>
-    <button v-if="showNext">Next</button>
+    <button v-if="currentStep > 0" @click="prevStep">Previous</button>
+    <button v-if="currentStep < 2" @click="nextStep">Next</button>
   </div>
 </template>
 <style scoped>
@@ -32,6 +28,7 @@ const { showPrevious, showNext } = toRefs(injectedButtons);
   width: 4rem;
   transition: 0.5s;
 }
+
 .buttons-container button:hover {
   background: white;
   color: rgba(77, 204, 132, 0.881);
