@@ -1,0 +1,34 @@
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 80%;
+  background: rgb(237, 246, 247);
+  padding: 30px;
+}
+.form-container h1 {
+  color: rgba(77, 204, 132, 0.881);
+  font-size: 15px;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 30px;
+}
+.form-container form input,
+.form-container form select {
+  height: 3rem;
+  border: none;
+  padding: 0 10px;
+}
+.form-container form input:focus,
+.personal-details-container form select:focus {
+  outline: 2px solid rgba(77, 204, 132, 0.881);
+}
+.form-container form input::placeholder {
+  color: black;
+}
