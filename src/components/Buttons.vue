@@ -25,7 +25,7 @@ const prevStep = inject("prevStep");
   border: none;
   cursor: pointer;
   height: 2rem;
-  width: 4rem;
+  width: 5rem;
   transition: 0.5s;
 }
 

@@ -3,7 +3,7 @@ import Buttons from "./Buttons.vue";
 </script>
 <template>
   <div class="form-container">
-    <h1>Review and Submit</h1>
+    <h1>Step 3: Review and Submit</h1>
     <form>
       <input type="text" placeholder="First Name" />
       <input type="text" placeholder="Second Name" />
@@ -22,19 +22,3 @@ import Buttons from "./Buttons.vue";
     <Buttons />
   </div>
 </template>
-<style scoped>
-.submit-btn {
-  background: rgba(77, 204, 132, 0.881);
-  color: white;
-  border: none;
-  cursor: pointer;
-  height: 2rem;
-  width: 30%;
-  transition: 0.5s;
-  align-self: center;
-}
-.submit-btn:hover {
-  background: white;
-  color: rgba(77, 204, 132, 0.881);
-}
-</style>

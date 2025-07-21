@@ -1,10 +1,20 @@
 <script setup>
-import { provide, ref } from "vue";
+import { provide, reactive, ref } from "vue";
 import PersonalInfo from "./PersonalInfo.vue";
 import AccountSetup from "./AccountSetup.vue";
 import "../assets/style.css";
 import ReviewInfo from "./ReviewInfo.vue";
+import ProgressBar from "./ProgressBar.vue";
 
+const formData = reactive({
+  firstName: "",
+  secondName: "",
+  dateOfBirth: "",
+  gender: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+});
 const currentStep = ref(0);
 const stepCount = 3;
 
@@ -29,7 +39,8 @@ provide("prevStep", prevStep);
   <div class="app-container">
     <h1>User Registration</h1>
     <!-- using is to dynamically bind a value to the components -->
-    <component :is="[PersonalInfo, AccountSetup, ReviewInfo][currentStep]" />
+    <ProgressBar :stepCount="stepCount" />
+    <component :is="[PersonalInfo, AccountSetup, ReviewInfo][currentStep]" :formData="formData" />
   </div>
 </template>
 <style scoped>
