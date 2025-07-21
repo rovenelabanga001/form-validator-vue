@@ -4,11 +4,13 @@ import { inject } from "vue";
 const currentStep = inject("currentStep");
 const nextStep = inject("nextStep");
 const prevStep = inject("prevStep");
+
+const emit = defineEmits(["triggerValidation"]);
 </script>
 <template>
   <div class="buttons-container">
     <button v-if="currentStep > 0" @click="prevStep">Previous</button>
-    <button v-if="currentStep < 2" @click="nextStep">Next</button>
+    <button v-if="currentStep < 2" @click="$emit('triggerValidation')">Next</button>
   </div>
 </template>
 <style scoped>

@@ -5,6 +5,8 @@ import AccountSetup from "./AccountSetup.vue";
 import "../assets/style.css";
 import ReviewInfo from "./ReviewInfo.vue";
 import ProgressBar from "./ProgressBar.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const formData = reactive({
   firstName: "",
@@ -30,17 +32,58 @@ const prevStep = () => {
   }
 };
 
+const checkPasswords = (password, confirmPassword) => {
+  if (password !== confirmPassword) {
+    toast.error("Passwords must match");
+    return false;
+  }
+  return true;
+};
+
+const isValidEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
+
 provide("currentStep", currentStep);
 provide("nextStep", nextStep);
 provide("prevStep", prevStep);
+provide("validators", { isValidEmail, checkPasswords });
+
+const handleValidation = (isValid) => {
+  if (isValid) {
+    nextStep();
+  }
+};
+
+const resetAll = () => {
+  const resetFormData = () => {
+    formData.firstName = "";
+    formData.secondName = "";
+    formData.dateOfBirth = "";
+    formData.gender = "";
+    formData.email = "";
+    formData.password = "";
+    formData.confirmPassword = "";
+  };
+
+  resetFormData();
+
+  currentStep.value = 0;
+};
 </script>
 
 <template>
   <div class="app-container">
     <h1>User Registration</h1>
-    <!-- using is to dynamically bind a value to the components -->
     <ProgressBar :stepCount="stepCount" />
-    <component :is="[PersonalInfo, AccountSetup, ReviewInfo][currentStep]" :formData="formData" />
+    <!-- using is to dynamically bind a value to the components -->
+    <component
+      :is="[PersonalInfo, AccountSetup, ReviewInfo][currentStep]"
+      :formData="formData"
+      @validated="handleValidation"
+      @resetAll="resetAll"
+    />
   </div>
 </template>
 <style scoped>
